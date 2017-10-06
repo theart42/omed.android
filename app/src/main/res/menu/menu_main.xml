@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="nl.secureapps.demohacklu.MainActivity">
+    <item
+        android:id="@+id/action_io"
+        android:orderInCategory="100"
+        android:title="@string/action_io"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_https"
+        android:orderInCategory="100"
+        android:title="@string/action_https"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_https_pin"
+        android:orderInCategory="100"
+        android:title="@string/action_https_pin"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_key"
+        android:orderInCategory="100"
+        android:title="@string/action_key"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_crypt"
+        android:orderInCategory="100"
+        android:title="@string/action_crypt"
+        app:showAsAction="never" />
+
+</menu>

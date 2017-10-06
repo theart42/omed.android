@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">DemoHackLu</string>
+    <string name="action_io">IO</string>
+    <string name="action_https">HTTPS</string>
+    <string name="action_https_pin">HTTPS-Pin</string>
+    <string name="action_key">Key</string>
+    <string name="action_crypt">Crypt</string>
+    <string name="label_welcome">Welcome!</string>
+</resources>
