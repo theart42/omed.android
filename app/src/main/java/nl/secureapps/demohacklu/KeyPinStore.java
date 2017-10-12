@@ -15,26 +15,49 @@ import javax.net.ssl.TrustManagerFactory;
 import javax.security.cert.CertificateException;
 import javax.security.cert.X509Certificate;
 
+import android.content.res.Resources;
+
+import android.app.Activity;
+import android.content.Context;
+
+import static nl.secureapps.demohacklu.R.raw.keystore;
+
 /**
  * Created by frank on 12/10/2017.
  */
 
 public class KeyPinStore {
+
     private static KeyPinStore instance = null;
     private SSLContext sslContext = SSLContext.getInstance("TLS");
 
-    public static synchronized KeyPinStore getInstance() throws CertificateException, IOException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException, java.security.cert.CertificateException {
+    public static synchronized KeyPinStore getInstance(Resources resources) throws CertificateException, IOException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException, java.security.cert.CertificateException {
         if (instance == null){
-            instance = new KeyPinStore();
+            instance = new KeyPinStore(resources);
         }
         return instance;
     }
 
-    private KeyPinStore() throws CertificateException, IOException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException, java.security.cert.CertificateException {
-        // Load CAs from an InputStream
-        // (could be from a resource or ByteArrayInputStream or ...)
-        CertificateFactory cf = CertificateFactory.getInstance("X.509");
+    private KeyPinStore(Resources resources) throws CertificateException, IOException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException, java.security.cert.CertificateException {
+//        CertificateFactory cf = CertificateFactory.getInstance("X.509");
+
+        // Context context = Context.class;
+        //context = new Context();
+        // Resources resources = context.getResources();
+        KeyStore trusted = KeyStore.getInstance("BKS");
+
         // randomCA.crt should be in the Assets directory
+        String tmfAlgorithm;
+        TrustManagerFactory tmf;
+        try (InputStream in = resources.openRawResource(keystore)) {
+            try {
+                trusted.load(in, "11Banaan!".toCharArray());
+            } finally {
+                in.close();
+            }
+        }
+/**
+        new BufferedInputStream(MainActivity.context.getAssets().open("randomCA.crt"));
         InputStream caInput = new BufferedInputStream(MainActivity.context.getAssets().open("randomCA.crt"));
         Certificate ca;
         try {
@@ -50,17 +73,18 @@ public class KeyPinStore {
         KeyStore keyStore = KeyStore.getInstance(keyStoreType);
         keyStore.load(null, null);
         keyStore.setCertificateEntry("ca", ca);
-
+**/
         // Create a TrustManager that trusts the CAs in our KeyStore
-        String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
-        TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
-        tmf.init(keyStore);
+        tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+        tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+        tmf.init(trusted);
 
         // Create an SSLContext that uses our TrustManager
         // SSLContext context = SSLContext.getInstance("TLS");
         sslContext.init(null, tmf.getTrustManagers(), null);
 
         System.out.println("We made it this far Frank");
+
     }
 
     public SSLContext getContext(){

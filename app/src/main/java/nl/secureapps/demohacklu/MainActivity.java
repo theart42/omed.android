@@ -16,6 +16,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.os.StrictMode;
 
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.security.cert.CertificateException;
+
 public class MainActivity extends AppCompatActivity {
     protected static Context context;
     public static final String OUTPUT_EVENT = "output_event";
@@ -127,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+//    private void handleSelectedOption(int id) throws CertificateException, NoSuchAlgorithmException, IOException, KeyManagementException, KeyStoreException, java.security.cert.CertificateException {
     private void handleSelectedOption(int id) {
         switch (id) {
             case R.id.action_io:
@@ -139,11 +147,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_https_pin:
                 HttpsDemo httpsPinDemo = new HttpsDemo();
-                httpsPinDemo.startHttpsPinDemo();
+                httpsPinDemo.startHttpsPinDemo(getResources());
                 break;
             case R.id.action_key:
                 KeyDemo keyDemo = new KeyDemo();
-                keyDemo.startKeyDemo();
+                keyDemo.startKeyDemo(getResources());
                 break;
             case R.id.action_crypt:
                 CryptoDemo cryptoDemo = new CryptoDemo();

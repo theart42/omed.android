@@ -1,6 +1,7 @@
 package nl.secureapps.demohacklu;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v4.content.LocalBroadcastManager;
 
 import android.util.Log;
@@ -25,6 +26,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import static nl.secureapps.demohacklu.KeyDemo.*;
 
 
 /**
@@ -122,43 +125,30 @@ public class HttpsDemo {
         }
     }
 
-    public void startHttpsPinDemo() {
-
-        MainActivity.processOutput("HTTPS-Pin demo results!");
-
-        Object result = null;
+    public void startHttpsPinDemo(Resources resources) {
 
         try {
-
-            byte[] secret = null;
-
             //Getting the keystore
-            KeyPinStore keystore = KeyPinStore.getInstance();
+            KeyPinStore keystore = KeyPinStore.getInstance(resources);
 
             // Tell the URLConnection to use a SocketFactory from our SSLContext
-            URL url = new URL( "https://www.random.org/integers/?num=16&min=0&max=255&col=16&base=10&format=plain&rnd=new");
-            //URL url = new URL( "https://www.google.com");
+            URL url = new URL( "https://www.agilesecurity.nl/?xyz=".concat(random(8)));
+
             HttpsURLConnection urlConnection = (HttpsURLConnection)url.openConnection();
             urlConnection.setSSLSocketFactory(keystore.getContext().getSocketFactory());
             InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
-            StringBuilder stringBuilder = new StringBuilder();w
+            StringBuilder stringBuilder = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
                 stringBuilder.append(line + "\n");
             }
             MainActivity.processOutput(stringBuilder.toString());
 
-        } catch (Exception ex) {
-
+        } catch (Exception e) {
             // Log error
-            MainActivity.processOutput(ex.toString());
-
-            // Prepare return value
-            result = (Object) ex;
+            MainActivity.processOutput(e.toString());
         }
-
-//        return result;
     }
 
 
