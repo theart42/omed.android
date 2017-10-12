@@ -13,7 +13,7 @@ import java.security.cert.CertificateFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 import javax.security.cert.CertificateException;
-import javax.security.cert.X509Certificate;
+// import javax.security.cert.X509Certificate;
 
 import android.content.res.Resources;
 
@@ -49,9 +49,11 @@ public class KeyPinStore {
         // randomCA.crt should be in the Assets directory
         String tmfAlgorithm;
         TrustManagerFactory tmf;
+        Hide hidePw = new Hide();
+
         try (InputStream in = resources.openRawResource(keystore)) {
             try {
-                trusted.load(in, "11Banaan!".toCharArray());
+                trusted.load(in, hidePw.getPW("AANxVVtXVlYY").toCharArray());
             } finally {
                 in.close();
             }

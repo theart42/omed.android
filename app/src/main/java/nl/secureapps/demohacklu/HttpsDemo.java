@@ -152,6 +152,7 @@ public class HttpsDemo {
     }
 
 
+/**
     // Deze code wordt niet gebruikt in deze opzet. ter inspiratie ...
     private void een_startpunt_voor_https_en_certificaat_controles_en_pinning_ter_inspiratie() {
         InputStream inputStream = null;
@@ -219,6 +220,7 @@ public class HttpsDemo {
             }
         }
     }
+**/
 }
 
 

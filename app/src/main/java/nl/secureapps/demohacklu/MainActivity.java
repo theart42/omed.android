@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.os.StrictMode;
+import android.util.Log;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
@@ -64,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
 
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,
                 new IntentFilter(OUTPUT_EVENT));
+
+        Hide hidePw = new Hide();
+
+        // String[] keyParts = hidePw.generateKeyXorParts("1234567890ABCDEF");
+        // Log.i("HidingUtil", "Password " + hidePw.getPW("MTFCYW5hYW4h"));
+        // Log.i("HidingUtil", "Password " + hidePw.getPW("AANxVVtXVlYY"));
+
     }
 
     @Override

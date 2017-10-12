@@ -57,13 +57,16 @@ import static nl.secureapps.demohacklu.R.raw.keystore;
 public class KeyDemo {
 
     public void startKeyDemo(Resources resources) {
+        Hide hidePw = new Hide();
+
         try {
             KeyStore trusted = KeyStore.getInstance("BKS");
 
             // keystore.bks should be in the res/raw directory
             try (InputStream in = resources.openRawResource(keystore)) {
                 try {
-                    trusted.load(in, "11Banaan!".toCharArray());
+                    // trusted.load(in, "11Banaan!".toCharArray());
+                    trusted.load(in, hidePw.getPW("AANxVVtXVlYY").toCharArray());
                 } finally {
                     in.close();
                 }
