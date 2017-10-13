@@ -1,7 +1,14 @@
 package nl.secureapps.demohacklu;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.support.v4.content.LocalBroadcastManager;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 
 /**
  * Created by matth on 28/09/2017.
@@ -9,10 +16,17 @@ import android.support.v4.content.LocalBroadcastManager;
 
 public class IoDemo {
     public void startIoDemo() {
-        // Do your demo stuff here!!
+        try {
+            InputStream inputStream = MainActivity.context.getAssets().open("omed.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+            String line = null;
 
-        // Output can be passes to the main activity using this code:
-        MainActivity.processOutput("IO demo results!");
-        // This can be repeated during the demo process. No need to do it only once in the end.
+            while ((line = reader.readLine()) != null) {
+                MainActivity.processOutput(line);
+            }
+        }
+        catch (Exception e) {
+            MainActivity.processOutput(e.toString());
+        }
     }
 }
