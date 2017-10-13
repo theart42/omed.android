@@ -14,15 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.os.StrictMode;
-import android.util.Log;
-
-import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-
-import javax.security.cert.CertificateException;
 
 public class MainActivity extends AppCompatActivity {
     protected static Context context;
@@ -67,11 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 new IntentFilter(OUTPUT_EVENT));
 
         Hide hidePw = new Hide();
-
-        // String[] keyParts = hidePw.generateKeyXorParts("1234567890ABCDEF");
-        // Log.i("HidingUtil", "Password " + hidePw.getPW("MTFCYW5hYW4h"));
-        // Log.i("HidingUtil", "Password " + hidePw.getPW("AANxVVtXVlYY"));
-
     }
 
     @Override
@@ -142,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    private void handleSelectedOption(int id) throws CertificateException, NoSuchAlgorithmException, IOException, KeyManagementException, KeyStoreException, java.security.cert.CertificateException {
     private void handleSelectedOption(int id) {
         switch (id) {
             case R.id.action_io:
