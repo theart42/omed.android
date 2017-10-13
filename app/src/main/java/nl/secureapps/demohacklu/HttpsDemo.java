@@ -101,8 +101,7 @@ public class HttpsDemo {
             MainActivity.processOutput(responseMessage);
 
             Certificate[] serverCerts = urlConnection.getServerCertificates();
-            MainActivity.processOutput(serverCerts[0].toString());
-
+//            MainActivity.processOutput(serverCerts[0].toString());
 
             if(responseCode < 400) {
                 inputStream = new BufferedInputStream(urlConnection.getInputStream());
@@ -112,6 +111,7 @@ public class HttpsDemo {
                 while ((line = reader.readLine()) != null) {
                     stringBuilder.append(line + "\n");
                 }
+                MainActivity.processOutput(stringBuilder.toString());
             }
         } catch (Exception e) {
             Log.e("HttpsURLConnection", "exception", e);
@@ -132,7 +132,7 @@ public class HttpsDemo {
             KeyPinStore keystore = KeyPinStore.getInstance(resources);
 
             // Tell the URLConnection to use a SocketFactory from our SSLContext
-            URL url = new URL( "https://www.agilesecurity.nl/?xyz=".concat(random(8)));
+            URL url = new URL( "https://2017.hack.lu/?xyz=".concat(random(8)));
 
             HttpsURLConnection urlConnection = (HttpsURLConnection)url.openConnection();
             urlConnection.setSSLSocketFactory(keystore.getContext().getSocketFactory());
